@@ -7,6 +7,11 @@ public class Environment : MonoBehaviour
 
     public float Refraction => _refraction;
 
+    private void Start()
+    {
+        _panel.InputField.onValueChanged.AddListener(SetRefractiveIndex);
+    }
+
     private void OnDisable()
     {
         _panel.InputField.onValueChanged.RemoveListener(SetRefractiveIndex);

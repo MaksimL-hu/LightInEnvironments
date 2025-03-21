@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Ray))]
 public class StretcherBetweenPoints : MonoBehaviour
 {
     public void Stretch(Vector3 _startPoint, Vector3 _endPoint)

@@ -36,7 +36,10 @@ public class ContentForPanels : MonoBehaviour
 
     private void ChangeVewPort(string arg)
     {
-        int countPanel = int.Parse(arg);
+        int countPanel;
+
+        if (int.TryParse(arg, out countPanel) == false)
+            return;
 
         if (countPanel < 2)
             return;
