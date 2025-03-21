@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class CameraDrag : MonoBehaviour
 {
-    [SerializeField] protected float DragSpeed = 0.01f;
+    [SerializeField] protected Sensitivity Sensitivity;
 
     protected Vector3 DragOrigin;
 

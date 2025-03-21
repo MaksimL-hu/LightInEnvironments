@@ -18,7 +18,7 @@ public class CameraTouchDrag : CameraDrag
                     Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
                     Vector3 difference = DragOrigin - touchPosition;
 
-                    transform.position += difference * DragSpeed;
+                    transform.position += difference * Sensitivity.SensitivityValue;
                     break;
             }
         }
