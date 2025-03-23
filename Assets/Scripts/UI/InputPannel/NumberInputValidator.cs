@@ -5,6 +5,8 @@ public class NumberInputValidator : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _inputField;
 
+    private char _validSymbol = ',';
+
     private void OnEnable()
     {
         _inputField.onValueChanged.AddListener(ValidateInput);
@@ -17,7 +19,7 @@ public class NumberInputValidator : MonoBehaviour
 
     private void ValidateInput(string text)
     {
-        string validText = "";
+        string validText = string.Empty;
         int dotCount = 0;
 
         foreach (char c in text)
@@ -26,16 +28,16 @@ public class NumberInputValidator : MonoBehaviour
             {
                 validText += c;
             }
-            else if (c == '.' && dotCount == 0)
+            else if (c == _validSymbol && dotCount == 0)
             {
                 validText += c;
                 dotCount++;
             }
         }
 
-        if (validText.StartsWith("."))
+        if (validText.StartsWith(_validSymbol))
         {
-            validText = validText.Substring(1); // Удаляем точку в начале
+            validText = validText.Substring(1);
         }
 
         _inputField.text = validText;

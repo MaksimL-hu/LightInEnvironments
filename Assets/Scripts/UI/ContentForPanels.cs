@@ -16,12 +16,14 @@ public class ContentForPanels : MonoBehaviour
     public event Action CountPanelsChanged;
 
     private float _spacing;
+    private int _additionalCountPanel;
 
     public int CountPanels => _panelsForRefractiveIndex.Count;
 
     private void Start()
     {
         _spacing = Mathf.Abs(_verticalLayoutGroup.spacing);
+        _additionalCountPanel = transform.childCount - _panelsForRefractiveIndex.Count;
     }
 
     private void OnEnable()
@@ -44,14 +46,14 @@ public class ContentForPanels : MonoBehaviour
         if (countPanel < 2)
             return;
 
-        float newHeight = ++countPanel * _heightBetweenPanels + _spacing;
+        float newHeight = (_additionalCountPanel + countPanel) * _heightBetweenPanels - (((_additionalCountPanel + countPanel) - 1) * _spacing);
         _transform.sizeDelta = new Vector2(_transform.sizeDelta.x, newHeight);
 
         int countExistingPanel = _panelsForRefractiveIndex.Count;
 
         if(countPanel > countExistingPanel) 
         {
-            for (int i = 0; i < countPanel - countExistingPanel - 1; i++)
+            for (int i = 0; i < countPanel - countExistingPanel; i++)
             {
                 InputPanelForRefractiveIndex panel = Instantiate(_panel, _transform);
                 panel.SetIndex(countExistingPanel + i + 1);
@@ -60,7 +62,7 @@ public class ContentForPanels : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < countExistingPanel - countPanel + 1; i++)
+            for (int i = 0; i < countExistingPanel - countPanel; i++)
             {
                 InputPanelForRefractiveIndex panel = _panelsForRefractiveIndex[_panelsForRefractiveIndex.Count - 1];
                 _panelsForRefractiveIndex.Remove(panel);

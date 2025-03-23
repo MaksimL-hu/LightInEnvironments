@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class PathBuilder : MonoBehaviour
     private Environment _nextEnvironment;
     private TextMeshProUGUI _placeholderAngle;
 
+    private float _infOffset = 1000f;
     private float _pathY;
     private float _angle;
     private float _offset;
@@ -60,11 +62,6 @@ public class PathBuilder : MonoBehaviour
 
     private float GetOffset(float angle)
     {
-        if (Mathf.Abs(angle - 90) < 0.01f)
-        {
-            return 1000f;
-        }
-
         return _pathY * (Mathf.Tan(angle * Mathf.Deg2Rad));
     }
 
@@ -88,6 +85,14 @@ public class PathBuilder : MonoBehaviour
         _points.Clear();
         _points.Add(_startPoint.position);
 
+        if (_angle == 90f)
+        {
+            _points.Add(_points[_points.Count - 1] + new Vector3(_infOffset, 0, 0));
+            CalculatedEnd?.Invoke();
+
+            return;
+        }
+
         _offset = GetOffset(_startingAngle);
         _points.Add(_points[0] + new Vector3(_offset, -_pathY, 0));
 
@@ -102,7 +107,14 @@ public class PathBuilder : MonoBehaviour
         {
             float criticalAngle = GetCriticalAngle(_angle);
 
-            if (_angle > criticalAngle && isReflection == false)
+            if (Mathf.Abs(criticalAngle - _angle) < 0.01f)
+            {
+                _points.Add(_points[_points.Count - 1] + new Vector3(_infOffset, 0, 0));
+                CalculatedEnd?.Invoke();
+
+                return;
+            }
+            else if (_angle > criticalAngle && isReflection == false)
             {
                 _angle = 180 - _angle;
                 _offset = GetOffset(_angle);

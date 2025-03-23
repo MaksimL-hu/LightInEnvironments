@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 209339984047177329}
   - component: {fileID: 7484260821697888738}
   - component: {fileID: 6645421261621933037}
-  - component: {fileID: 9197736781374880896}
+  - component: {fileID: 416441008622104451}
   m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
---- !u!114 &9197736781374880896
+--- !u!114 &416441008622104451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -577,6 +577,7 @@ GameObject:
   - component: {fileID: 1718873586623657589}
   - component: {fileID: 7896047140453351518}
   - component: {fileID: 5349566937360682853}
+  - component: {fileID: 6386145103848784346}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -722,3 +723,17 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &6386145103848784346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190883000386429631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9b4b989e305984aa8a59f99e1e7fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textPlaceholder: {fileID: 7896047140453351518}
+  _inputField: {fileID: 6645421261621933037}
